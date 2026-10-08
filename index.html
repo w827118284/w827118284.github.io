@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王振邦 · AI 应用 / Agent 开发</title>
+<style>
+  :root {
+    --ink: #1a2332;
+    --ink-2: #45536a;
+    --ink-3: #7a879e;
+    --accent: #0f766e;
+    --accent-soft: #f0fdfa;
+    --line: #e4e9f0;
+    --bg: #fafbfc;
+    --card: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Hero ---------- */
+  header.hero {
+    padding: 88px 0 56px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(600px 200px at 15% 0%, rgba(15,118,110,.06), transparent 70%),
+      var(--bg);
+  }
+  .hero .kicker {
+    font-size: 13px; letter-spacing: .18em; color: var(--accent);
+    font-weight: 600; text-transform: uppercase; margin-bottom: 14px;
+  }
+  .hero h1 { font-size: 40px; letter-spacing: .02em; margin-bottom: 10px; }
+  .hero .role { font-size: 18px; color: var(--ink-2); margin-bottom: 22px; }
+  .hero .thesis {
+    max-width: 640px; color: var(--ink-2); font-size: 15.5px;
+    border-left: 3px solid var(--accent); padding-left: 16px; margin-bottom: 28px;
+  }
+  .hero .thesis strong { color: var(--ink); }
+  .contacts { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px;
+    background: var(--card); font-size: 13.5px; color: var(--ink-2);
+    text-decoration: none; transition: border-color .15s, color .15s;
+  }
+  a.chip:hover { border-color: var(--accent); color: var(--accent); }
+  .chip svg { width: 15px; height: 15px; flex: none; }
+
+  /* ---------- Sections ---------- */
+  section { padding: 52px 0 8px; }
+  .sec-title {
+    display: flex; align-items: baseline; gap: 12px; margin-bottom: 26px;
+  }
+  .sec-title h2 { font-size: 22px; letter-spacing: .02em; }
+  .sec-title .no { font-size: 13px; color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .sec-title::after { content: ""; flex: 1; height: 1px; background: var(--line); align-self: center; }
+
+  /* ---------- About ---------- */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .about-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px;
+  }
+  .about-card .label { font-size: 12.5px; color: var(--ink-3); margin-bottom: 5px; }
+  .about-card .value { font-size: 15px; font-weight: 600; }
+  .about-card .sub { font-size: 13px; color: var(--ink-2); }
+
+  /* ---------- Skills ---------- */
+  .skill-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .skill-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px;
+  }
+  .skill-card h3 { font-size: 15px; margin-bottom: 10px; color: var(--accent); }
+  .skill-card ul { list-style: none; }
+  .skill-card li {
+    font-size: 13.5px; color: var(--ink-2); padding: 3px 0 3px 16px; position: relative;
+  }
+  .skill-card li::before {
+    content: ""; position: absolute; left: 0; top: 11px;
+    width: 6px; height: 6px; border-radius: 2px; background: var(--accent); opacity: .5;
+  }
+
+  /* ---------- Projects ---------- */
+  .project {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 30px; margin-bottom: 26px;
+  }
+  .project .p-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
+  .project h3 { font-size: 20px; }
+  .project .tag {
+    font-size: 12px; padding: 4px 11px; border-radius: 999px; font-weight: 600; white-space: nowrap;
+  }
+  .tag.intern { background: #fef3c7; color: #92400e; }
+  .tag.personal { background: var(--accent-soft); color: var(--accent); }
+  .project .p-sub { font-size: 13.5px; color: var(--ink-3); margin-bottom: 16px; }
+  .project .p-sub .gh { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .project .p-sub .gh:hover { text-decoration: underline; }
+  .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .stack span {
+    font-size: 12px; padding: 3px 10px; border-radius: 6px;
+    background: #f1f5f9; color: var(--ink-2); font-family: ui-monospace, Consolas, monospace;
+  }
+  .project ul.points { list-style: none; margin-bottom: 20px; }
+  .project ul.points li {
+    font-size: 14px; color: var(--ink-2); padding: 5px 0 5px 20px; position: relative;
+  }
+  .project ul.points li::before {
+    content: "▸"; position: absolute; left: 2px; color: var(--accent); font-weight: 700;
+  }
+  .project ul.points li strong { color: var(--ink); }
+  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .shots.one { grid-template-columns: 1fr; }
+  .shots figure {
+    border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #f8fafc;
+  }
+  .shots img { width: 100%; display: block; }
+  .shots figcaption {
+    font-size: 12px; color: var(--ink-3); padding: 8px 12px; border-top: 1px solid var(--line);
+  }
+
+  /* ---------- Terminal ---------- */
+  .terminal {
+    border-radius: 10px; overflow: hidden; border: 1px solid #24304a;
+    background: #0f172a; font-family: ui-monospace, Consolas, "Courier New", monospace;
+    font-size: 13px; margin-bottom: 20px;
+  }
+  .terminal .t-bar {
+    display: flex; align-items: center; gap: 6px;
+    background: #1e293b; padding: 9px 14px;
+  }
+  .terminal .t-bar i { width: 11px; height: 11px; border-radius: 50%; display: block; }
+  .terminal .t-bar i:nth-child(1) { background: #f87171; }
+  .terminal .t-bar i:nth-child(2) { background: #fbbf24; }
+  .terminal .t-bar i:nth-child(3) { background: #34d399; }
+  .terminal .t-bar span { margin-left: 8px; color: #94a3b8; font-size: 12px; }
+  .terminal pre { padding: 16px 18px; color: #cbd5e1; overflow-x: auto; line-height: 1.65; }
+  .terminal .ok { color: #34d399; font-weight: 700; }
+  .terminal .cmd { color: #7dd3fc; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 60px; border-top: 1px solid var(--line);
+    padding: 32px 0 48px; text-align: center; color: var(--ink-3); font-size: 13px;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 30px; }
+    .about-grid, .skill-row, .shots { grid-template-columns: 1fr; }
+    .project { padding: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">AI Application / Agent Engineer</div>
+    <h1>王振邦</h1>
+    <div class="role">AI 应用开发 / Agent 开发实习生 · 东华大学 计算机技术 硕士在读</div>
+    <p class="thesis">
+      我关注的不是"让 Agent 跑一次"，而是<strong>让 Agent 的失败可见、可控、可恢复</strong>——
+      从工具运行时的异常治理，到会话状态的持久化恢复，再到语义层的错误经验沉淀，
+      三个项目分别在三条线上做了工程化实践。
+    </p>
+    <div class="contacts">
+      <a class="chip" href="https://github.com/w827118284" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        github.com/w827118284
+      </a>
+      <a class="chip" href="mailto:hui1ai@outlook.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+        hui1ai@outlook.com
+      </a>
+      <span class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        19916931874
+      </span>
+      <span class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        上海 · 每周可实习 5 天 · 可长期至毕业
+      </span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <div class="sec-title"><span class="no">01</span><h2>关于我</h2></div>
+  <div class="about-grid">
+    <div class="about-card">
+      <div class="label">教育经历</div>
+      <div class="value">东华大学 · 计算机技术 · 硕士</div>
+      <div class="sub">2025.09 – 2028.06（在读）</div>
+      <div class="value" style="margin-top:10px">上海第二工业大学 · 软件工程 · 本科</div>
+      <div class="sub">2019.09 – 2023.06</div>
+    </div>
+    <div class="about-card">
+      <div class="label">实习经历</div>
+      <div class="value">上海艾哲智 · AI 应用开发实习生</div>
+      <div class="sub">2026.03 – 2026.07 · 面向北美婚纱跨境电商的智能导购与客服 Agent，
+        负责多步运行时、会话上下文与人工反馈经验库</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-title"><span class="no">02</span><h2>技能栈</h2></div>
+  <div class="skill-row">
+    <div class="skill-card">
+      <h3>Agent 开发</h3>
+      <ul>
+        <li>Python · Agent Loop · Tool Calling</li>
+        <li>LangGraph 状态图编排</li>
+        <li>上下文治理 · 分层记忆</li>
+        <li>Checkpoint / Resume</li>
+        <li>Human-in-the-loop</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <h3>知识检索</h3>
+      <ul>
+        <li>SentenceTransformer · Embedding</li>
+        <li>文档切块 · Top-K 召回</li>
+        <li>业务知识 / 对话记忆边界</li>
+        <li>人工纠错经验沉淀</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <h3>应用工程</h3>
+      <ul>
+        <li>FastAPI · SQLAlchemy · asyncio</li>
+        <li>PostgreSQL / SQLite · SSE · JWT</li>
+        <li>限流熔断 · Provider 治理</li>
+        <li>React / TypeScript · Docker Compose</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-title"><span class="no">03</span><h2>项目</h2></div>
+
+  <!-- ================= 项目一：实习 ================= -->
+  <article class="project">
+    <div class="p-head">
+      <h3>BridalGuide · 跨境电商智能导购与客服 Agent</h3>
+      <span class="tag intern">实习项目 · 上海艾哲智 2026.03 – 2026.07</span>
+    </div>
+    <div class="p-sub">面向北美婚纱跨境电商 · 负责多步运行时、会话上下文及人工反馈经验库 · 公司项目源码不可公开（下图为个人独立复现的测试证据）</div>
+    <div class="stack">
+      <span>Python</span><span>Agent Runtime</span><span>Tool Registry</span><span>RAG</span><span>SentenceTransformer</span><span>分层上下文</span><span>反馈闭环</span><span>pytest</span>
+    </div>
+    <ul class="points">
+      <li><strong>多步 Agent Runtime：</strong>模型适配层 + Tool Registry / Executor 解耦决策与执行，实现"决策 → 调用 → 观察 → 再规划"循环；配置最大步数、超时与重复调用保护，工具异常统一转为 Observation 供后续决策。</li>
+      <li><strong>业务检索与事实边界：</strong>文档切块 + 向量召回 + 来源追踪，按 Top-K 与相似度阈值筛选；款式、面料等稳定知识走 RAG，订单与物流走结构化工具查询，各不越界。</li>
+      <li><strong>长会话管理：</strong>显式用户画像 + 增量摘要 + 历史语义召回 + 最近对话，按优先级分配上下文预算；摘要中过滤动态订单事实，实时问题强制重新调用业务工具。</li>
+      <li><strong>反馈闭环与评测：</strong>人工纠正蒸馏为可复用 Lesson，审核通过才进入检索；开发集与冻结 holdout 分离的测评集，真实模型三轮采集 + 失败归因 + 工具故障注入恢复验证。</li>
+    </ul>
+    <div class="terminal">
+      <div class="t-bar"><i></i><i></i><i></i><span>独立复现仓库 · pytest</span></div>
+      <pre><span class="cmd">$ python -m pytest -q</span>
+................................................................  [100%]
+<span class="ok">64 passed in 29.33s</span>
+含 9 个业务验收场景 · 覆盖工具异常恢复 / 检索边界 / 记忆失效 / 反馈蒸馏</pre>
+    </div>
+  </article>
+
+  <!-- ================= 项目二：RepoPilot ================= -->
+  <article class="project">
+    <div class="p-head">
+      <h3>RepoPilot · 可恢复的本地编程智能体</h3>
+      <span class="tag personal">个人项目</span>
+    </div>
+    <div class="p-sub">开源地址：<a class="gh" href="https://github.com/w827118284/RepoPilot" target="_blank" rel="noopener">github.com/w827118284/RepoPilot</a></div>
+    <div class="stack">
+      <span>Python</span><span>Agent Harness</span><span>Context Management</span><span>Layered Memory</span><span>Checkpoint</span>
+    </div>
+    <ul class="points">
+      <li><strong>运行时架构：</strong>面向本地代码仓库的多步 Agent Harness，统一模型适配、工具注册、参数校验与会话状态；支持文件检索、读写、命令执行及受限任务委派等 7 类工具。</li>
+      <li><strong>上下文治理：</strong>按字符预算分层裁剪历史与相关记忆，完整保留当前请求；12 组离线合成配置中，平均 prompt 字符数由 7082 降至 5664（-20%）。</li>
+      <li><strong>分层记忆：</strong>任务摘要 / 文件摘要 / 过程笔记按相关性召回；检测文件变化使陈旧摘要自动失效，12 类合成任务对照验证信息传递与重复读取行为。</li>
+      <li><strong>任务恢复：</strong>Checkpoint 保存目标、进度、关键文件与运行时身份，恢复前校验文件时效与工作区一致性，区分可恢复 / 部分失效 / 不兼容三种状态，覆盖 10 个预设恢复场景。</li>
+      <li><strong>执行治理与审计：</strong>危险操作审批、重复调用拦截、日志脱敏；落盘任务状态、trace 与报告，按运行时 / 上下文 / 记忆 / 恢复四层分别评测。</li>
+    </ul>
+    <div class="shots">
+      <figure>
+        <img src="assets/pico-start.png" alt="RepoPilot 启动界面" loading="lazy">
+        <figcaption>启动界面：工作区 / 模型 / 审批模式 / 会话 ID 一目了然</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/pico-repl.png" alt="RepoPilot REPL 命令" loading="lazy">
+        <figcaption>REPL 内置命令：/memory 查看蒸馏记忆，/session 定位会话存档</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- ================= 项目三：AI 内容运营 Agent ================= -->
+  <article class="project">
+    <div class="p-head">
+      <h3>AI 内容运营 Agent · 可恢复的内容生产工作流</h3>
+      <span class="tag personal">个人项目</span>
+    </div>
+    <div class="p-sub">开源地址：<a class="gh" href="https://github.com/w827118284/ai-content-agent" target="_blank" rel="noopener">github.com/w827118284/ai-content-agent</a> · 下方截图为本地实际运行（Mock Provider 模式）</div>
+    <div class="stack">
+      <span>FastAPI</span><span>LangGraph</span><span>PostgreSQL</span><span>Alembic</span><span>SSE</span><span>React</span><span>Docker</span>
+    </div>
+    <ul class="points">
+      <li><strong>人工审核工作流：</strong>选题 → 写作 → 审核 → 配图编排为 StateGraph，interrupt / resume 支持选题确认与多轮退回修改；人工节点暂停前不执行收费调用或业务写入。</li>
+      <li><strong>状态持久化：</strong>PostgreSQL Checkpointer 保存工作流状态，业务表仅存用户归属与历史摘要；按 thread_id 从审核节点恢复，checkpoint 表与 Alembic 业务表迁移分开管理。</li>
+      <li><strong>Provider 治理：</strong>LLM 超时 / 连接错误 / 429 / 5xx 至多重试一次并关闭 SDK 重试；收费生图不自动重试；并发限制 + 滑动窗口限流 + 半开状态单探测熔断。</li>
+      <li><strong>应用交付：</strong>JWT 校验用户与工作流归属，SSE 推送节点进度；逐跳校验图片下载 URL 限制 SSRF 风险；Mock / Real 一键切换，Docker Compose 一键起全栈。</li>
+    </ul>
+    <div class="shots">
+      <figure>
+        <img src="assets/03-article-review.png" alt="人工审核界面" loading="lazy">
+        <figcaption>人工审核节点：工作流在 interrupt 处暂停，左侧进度条实时更新，可"通过"或"要求修改"</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/05-completed-final.png" alt="任务完成界面" loading="lazy">
+        <figcaption>审核通过后自动提炼视觉知识点并生成小红书竖版知识卡片（Mock 模式本地实拍）</figcaption>
+      </figure>
+    </div>
+  </article>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    王振邦 · AI 应用开发 / Agent 开发实习生 ·
+    <a href="mailto:hui1ai@outlook.com">hui1ai@outlook.com</a> ·
+    <a href="https://github.com/w827118284" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+</body>
+</html>
